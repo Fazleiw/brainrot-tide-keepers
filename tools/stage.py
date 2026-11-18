@@ -33,5 +33,6 @@ def trip(rarity, slot):
 
 
 drive.luau(f'workspace:SetAttribute("StudioGrantMoney", {int(args[0]) if args else 60000}) return 1')
-for rarity, slot in [("Legendary", 2), ("Legendary", 1), ("Epic", 4), ("Epic", 3), ("Rare", 6), ("Common", 5)]:
+# Tall keepers in the front row, a short one in the back-centre slot right under the base sign.
+for rarity, slot in [("Legendary", 4), ("Legendary", 6), ("Epic", 5), ("Rare", 1), ("Rare", 3), ("Common", 2)]:
     trip(rarity, slot)

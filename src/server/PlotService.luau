@@ -84,9 +84,13 @@ function PlotService.setSlot(plot: Plot, slotIndex: number, keeper: State.Keeper
 	end
 	slot.keeper = keeper
 	slot.part:SetAttribute("Occupied", keeper ~= nil)
+	local steal = slot.part:FindFirstChild("StealPrompt")
+	if steal then
+		steal.ObjectText = if keeper then Brainrots.get(keeper.id).name else ""
+	end
 	if keeper then
 		local model = BrainrotModels.build(keeper.id, keeper.mutated)
-		BrainrotModels.standOn(model, slot.part)
+		BrainrotModels.standOn(model, slot.part, slotIndex)
 		model.Parent = plot.model
 		slot.model = model
 	end
@@ -206,6 +210,7 @@ local function addPrompt(parent: Instance, name: string, action: string, hold: n
 	prompt.MaxActivationDistance = 10
 	prompt.RequiresLineOfSight = false
 	prompt.KeyboardKeyCode = Enum.KeyCode.E
+	prompt.Style = Enum.ProximityPromptStyle.Custom -- drawn by the client's Prompts module
 	prompt.Parent = parent
 	return prompt
 end
@@ -222,7 +227,7 @@ function PlotService.start()
 			addPrompt(part, "PlacePrompt", "Place keeper", 0).Triggered:Connect(function(player)
 				PlotService.placeKeeper(player, plot, k)
 			end)
-			addPrompt(part, "StealPrompt", "Steal", Config.STEAL_HOLD_SECONDS) -- wired by StealService
+			addPrompt(part, "StealPrompt", "HOLD E TO STEAL", Config.STEAL_HOLD_SECONDS) -- wired by StealService
 		end
 		addPrompt(model.LockPad, "LockPrompt", "Lock base " .. Economy.formatMoney(Config.LOCK_PRICE), 0)
 		plots[i] = plot

@@ -70,6 +70,7 @@ function PurchaseService.start()
 		prompt.HoldDuration = 0.3
 		prompt.MaxActivationDistance = 11
 		prompt.RequiresLineOfSight = false
+		prompt.Style = Enum.ProximityPromptStyle.Custom -- drawn by the client's Prompts module
 		prompt.Parent = pedestal
 		local offer: Offer = { pedestal = pedestal, rarity = rarity, entryId = nil, display = nil, prompt = prompt }
 		prompt.Triggered:Connect(function(player)

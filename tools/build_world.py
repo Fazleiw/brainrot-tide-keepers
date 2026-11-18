@@ -79,6 +79,14 @@ gauge["Post"] = part([1.2, 12, 1.2], [34, 6, 30], rgb(240, 240, 240), "Wood")
 for i, (y, c) in enumerate([(1.5, rgb(80, 200, 120)), (3.5, rgb(255, 200, 40)), (5.5, rgb(255, 60, 60))]):
     gauge[f"Mark{i}"] = part([1.4, 0.5, 1.4], [34, y, 30], c, "Neon")
 ground["TideGauge"] = gauge
+# The game's title on the back wall, above the gaps between the bases and high enough to clear the keepers' labels.
+for side in (-1, 1):
+    tx = side * 52
+    ground[f"TitleBoard{side}"] = part([46, 9, 1], [tx, 52, -95.6], rgb(12, 16, 30), children={
+        "Title": surface_text("BRAINROT TIDE KEEPERS", rgb(255, 225, 70), 20), "Glow": light(rgb(255, 220, 120), 30, 3)})
+    ground[f"TitleFrame{side}"] = part([48, 11, 0.6], [tx, 52, -96.2], rgb(60, 220, 230), "Neon")
+    for px in (-16, 16):
+        ground[f"TitlePost{side}_{px}"] = part([1.2, 30, 1.2], [tx + px, 33, -96], rgb(60, 50, 40), "Wood")
 world["Harbour"] = ground
 
 # The water that rises in a surge: its top starts at y=-1.5 (under the floor); TideService tweens it up.
@@ -108,10 +116,12 @@ for i, x in enumerate(PLOT_X):
     plot["LockPad"] = part([4, 1, 4], [x - 17, 9.5, -60], rgb(230, 60, 60), "Neon")
     plot["LockPost"] = part([1, 5, 1], [x - 17, 11, -62.5], rgb(60, 60, 70), "Metal")
     plot["Barrier"] = part([44, 9, 0.6], [x, 13.5, -57.6], rgb(255, 60, 80), "ForceField", Transparency=1, CanCollide=False)
-    plot["SignPost"] = part([1.2, 10, 1.2], [x, 14, -92], rgb(60, 50, 40), "Wood")
-    sign_gui = surface_text(f"EMPTY PLOT {i + 1}", acc)
+    plot["SignPost"] = part([1.2, 16, 1.2], [x, 17, -93.2], rgb(60, 50, 40), "Wood")
+    # Cream text on a near-black board inside an accent-coloured frame: readable from across the market.
+    sign_gui = surface_text(f"EMPTY PLOT {i + 1}", rgb(255, 246, 225))
     sign_gui["OwnerLabel"] = sign_gui.pop("Text")
-    plot["SignBoard"] = part([20, 4, 0.6], [x, 19, -92], rgb(30, 34, 48), children={"OwnerSign": sign_gui, "Glow": light(acc, 18, 2)})
+    plot["SignBoard"] = part([20, 4, 0.6], [x, 25, -92], rgb(16, 18, 26), children={"OwnerSign": sign_gui, "Glow": light(acc, 18, 2)})
+    plot["SignFrame"] = part([21, 5, 0.4], [x, 25, -92.4], acc, "Neon")
     for fz in range(-90, -58, 8):
         plot[f"FenceL{fz}"] = part([0.8, 3, 0.8], [x - 22, 10.5, fz], rgb(90, 70, 50), "Wood")
         plot[f"FenceR{fz}"] = part([0.8, 3, 0.8], [x + 22, 10.5, fz], rgb(90, 70, 50), "Wood")
@@ -131,23 +141,23 @@ stall = folder("Model")
 stall["Counter"] = part([62, 1, 14], [0, 0.5, 8], rgb(110, 80, 55), "WoodPlanks")
 for cx in (-30, 30):
     for cz in (2, 14):
-        stall[f"Pole{cx}_{cz}"] = part([1, 14, 1], [cx, 7, cz], rgb(80, 60, 40), "Wood")
+        stall[f"Pole{cx}_{cz}"] = part([1, 24, 1], [cx, 12, cz], rgb(80, 60, 40), "Wood")
 for s in range(11):
-    stall[f"Awning{s}"] = part([62 / 11, 0.6, 16], [-31 + 62 / 22 + s * 62 / 11, 14.5, 8],
+    # Raised high enough that the keepers' labels and price tags float under it, not through it.
+    stall[f"Awning{s}"] = part([62 / 11, 0.6, 16], [-31 + 62 / 22 + s * 62 / 11, 24.5, 8],
                                rgb(230, 60, 60) if s % 2 == 0 else rgb(245, 240, 230), "Fabric", rot=(-8, 0, 0))
 pedestals = folder()
 for j, (name, col) in enumerate(RARITY):
-    px = -21 + j * 14
+    px = -24 + j * 16  # 8-stud gaps between the 8-stud pedestals so their labels never touch
     pedestals[name] = part([3, 8, 8], [px, 2.5, 8], rgb(60, 64, 80), "Marble", rot=(0, 0, 90), Shape="Cylinder",
                            children={"Rim": part([0.6, 8.8, 8.8], [px, 4.3, 8], col, "Neon", rot=(0, 0, 90), Shape="Cylinder"),
                                      "Light": light(col, 16, 3)})
-    stall[f"Tag{name}"] = part([8, 1.6, 0.4], [px, 1.2, 12.3], col, "Neon",
-                               children={"Gui": surface_text(name.upper(), rgb(20, 20, 30), 30, stroke=False)})
+    stall[f"Tag{name}"] = part([8, 1.6, 0.4], [px, 1.2, 12.3], col, "Neon")  # the keeper's own label names the rarity
 stall["Pedestals"] = pedestals
-stall["BigSign"] = part([60, 10, 1], [0, 22, 4], rgb(20, 30, 60), children={
+stall["BigSign"] = part([60, 10, 1], [0, 32, 4], rgb(20, 30, 60), children={
     "Front": surface_text("BRAINROT TIDE KEEPERS", rgb(255, 220, 80), 20), "Glow": light(rgb(255, 210, 120), 30, 3)})
-stall["SignTrim"] = part([62, 11, 0.6], [0, 22, 3.6], rgb(60, 220, 230), "Neon")
-stall["SubSign"] = part([30, 2.6, 0.4], [0, 15.8, 16.3], rgb(250, 240, 220), children={
+stall["SignTrim"] = part([62, 11, 0.6], [0, 32, 3.6], rgb(60, 220, 230), "Neon")
+stall["SubSign"] = part([30, 2.6, 0.4], [0, 25.8, 16.3], rgb(250, 240, 220), children={
     "Gui": surface_text("FRESH FROM THE TIDE - HOLD E TO BUY", rgb(30, 60, 120), 30, stroke=False)})
 world["Stall"] = stall
 
@@ -213,11 +223,11 @@ project = {
         "Workspace": dict({"$properties": {"FilteringEnabled": True}}, **world),
         "Lighting": {
             "$properties": {"Ambient": rgb(95, 90, 120), "OutdoorAmbient": rgb(145, 135, 175), "Brightness": 2.8,
-                            "ClockTime": 17.7, "GlobalShadows": True, "Technology": "Future", "EnvironmentDiffuseScale": 0.5},
+                            "ClockTime": 17.4, "GeographicLatitude": 85, "GlobalShadows": True, "Technology": "Future", "EnvironmentDiffuseScale": 0.5},
             "Atmosphere": {"$className": "Atmosphere", "$properties": {"Density": 0.28, "Offset": 0.1, "Color": rgb(255, 170, 140),
                                                                      "Decay": rgb(90, 80, 140), "Glare": 0.4, "Haze": 1.6}},
-            "Bloom": {"$className": "BloomEffect", "$properties": {"Intensity": 0.6, "Size": 30, "Threshold": 1.4}},
-            "Grade": {"$className": "ColorCorrectionEffect", "$properties": {"Saturation": 0.15, "Contrast": 0.08}},
+            "Bloom": {"$className": "BloomEffect", "$properties": {"Intensity": 0.25, "Size": 24, "Threshold": 1.7}},
+            "Grade": {"$className": "ColorCorrectionEffect", "$properties": {"Brightness": 0.05, "Saturation": 0.15, "Contrast": 0.08}},
         },
         "SoundService": {"$properties": {"RespectFilteringEnabled": True}},
     },

@@ -663,6 +663,474 @@
        }
       }
      }
+    },
+    "TitleBoard-1": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       46,
+       9,
+       1
+      ],
+      "Color": [
+       0.0471,
+       0.0627,
+       0.1176
+      ],
+      "Material": "SmoothPlastic",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         -52,
+         52,
+         -95.6
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     },
+     "Title": {
+      "$className": "SurfaceGui",
+      "$properties": {
+       "Face": "Back",
+       "SizingMode": "PixelsPerStud",
+       "PixelsPerStud": 20,
+       "LightInfluence": 0
+      },
+      "Text": {
+       "$className": "TextLabel",
+       "$properties": {
+        "Text": "BRAINROT TIDE KEEPERS",
+        "TextScaled": true,
+        "Font": "FredokaOne",
+        "TextColor3": [
+         1.0,
+         0.8824,
+         0.2745
+        ],
+        "BackgroundTransparency": 1,
+        "Size": {
+         "UDim2": [
+          [
+           1,
+           0
+          ],
+          [
+           1,
+           0
+          ]
+         ]
+        },
+        "TextStrokeTransparency": 0,
+        "TextStrokeColor3": [
+         0.0392,
+         0.0784,
+         0.1569
+        ]
+       }
+      }
+     },
+     "Glow": {
+      "$className": "PointLight",
+      "$properties": {
+       "Color": [
+        1.0,
+        0.8627,
+        0.4706
+       ],
+       "Range": 30,
+       "Brightness": 3,
+       "Shadows": false
+      }
+     }
+    },
+    "TitleFrame-1": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       48,
+       11,
+       0.6
+      ],
+      "Color": [
+       0.2353,
+       0.8627,
+       0.902
+      ],
+      "Material": "Neon",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         -52,
+         52,
+         -96.2
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
+    },
+    "TitlePost-1_-16": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       1.2,
+       30,
+       1.2
+      ],
+      "Color": [
+       0.2353,
+       0.1961,
+       0.1569
+      ],
+      "Material": "Wood",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         -68,
+         33,
+         -96
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
+    },
+    "TitlePost-1_16": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       1.2,
+       30,
+       1.2
+      ],
+      "Color": [
+       0.2353,
+       0.1961,
+       0.1569
+      ],
+      "Material": "Wood",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         -36,
+         33,
+         -96
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
+    },
+    "TitleBoard1": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       46,
+       9,
+       1
+      ],
+      "Color": [
+       0.0471,
+       0.0627,
+       0.1176
+      ],
+      "Material": "SmoothPlastic",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         52,
+         52,
+         -95.6
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     },
+     "Title": {
+      "$className": "SurfaceGui",
+      "$properties": {
+       "Face": "Back",
+       "SizingMode": "PixelsPerStud",
+       "PixelsPerStud": 20,
+       "LightInfluence": 0
+      },
+      "Text": {
+       "$className": "TextLabel",
+       "$properties": {
+        "Text": "BRAINROT TIDE KEEPERS",
+        "TextScaled": true,
+        "Font": "FredokaOne",
+        "TextColor3": [
+         1.0,
+         0.8824,
+         0.2745
+        ],
+        "BackgroundTransparency": 1,
+        "Size": {
+         "UDim2": [
+          [
+           1,
+           0
+          ],
+          [
+           1,
+           0
+          ]
+         ]
+        },
+        "TextStrokeTransparency": 0,
+        "TextStrokeColor3": [
+         0.0392,
+         0.0784,
+         0.1569
+        ]
+       }
+      }
+     },
+     "Glow": {
+      "$className": "PointLight",
+      "$properties": {
+       "Color": [
+        1.0,
+        0.8627,
+        0.4706
+       ],
+       "Range": 30,
+       "Brightness": 3,
+       "Shadows": false
+      }
+     }
+    },
+    "TitleFrame1": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       48,
+       11,
+       0.6
+      ],
+      "Color": [
+       0.2353,
+       0.8627,
+       0.902
+      ],
+      "Material": "Neon",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         52,
+         52,
+         -96.2
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
+    },
+    "TitlePost1_-16": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       1.2,
+       30,
+       1.2
+      ],
+      "Color": [
+       0.2353,
+       0.1961,
+       0.1569
+      ],
+      "Material": "Wood",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         36,
+         33,
+         -96
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
+    },
+    "TitlePost1_16": {
+     "$className": "Part",
+     "$properties": {
+      "Anchored": true,
+      "Size": [
+       1.2,
+       30,
+       1.2
+      ],
+      "Color": [
+       0.2353,
+       0.1961,
+       0.1569
+      ],
+      "Material": "Wood",
+      "TopSurface": "Smooth",
+      "BottomSurface": "Smooth",
+      "CFrame": {
+       "CFrame": {
+        "position": [
+         68,
+         33,
+         -96
+        ],
+        "orientation": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.0,
+          1.0
+         ]
+        ]
+       }
+      }
+     }
     }
    },
    "TideWater": {
@@ -1542,7 +2010,7 @@
        "Anchored": true,
        "Size": [
         1.2,
-        10,
+        16,
         1.2
        ],
        "Color": [
@@ -1557,8 +2025,8 @@
         "CFrame": {
          "position": [
           -78,
-          14,
-          -92
+          17,
+          -93.2
          ],
          "orientation": [
           [
@@ -1591,9 +2059,9 @@
         0.6
        ],
        "Color": [
-        0.1176,
-        0.1333,
-        0.1882
+        0.0627,
+        0.0706,
+        0.102
        ],
        "Material": "SmoothPlastic",
        "TopSurface": "Smooth",
@@ -1602,7 +2070,7 @@
         "CFrame": {
          "position": [
           -78,
-          19,
+          25,
           -92
          ],
          "orientation": [
@@ -1640,9 +2108,9 @@
          "TextScaled": true,
          "Font": "FredokaOne",
          "TextColor3": [
-          0.2353,
-          0.7843,
-          0.8235
+          1.0,
+          0.9647,
+          0.8824
          ],
          "BackgroundTransparency": 1,
          "Size": {
@@ -1677,6 +2145,51 @@
         "Range": 18,
         "Brightness": 2,
         "Shadows": false
+       }
+      }
+     },
+     "SignFrame": {
+      "$className": "Part",
+      "$properties": {
+       "Anchored": true,
+       "Size": [
+        21,
+        5,
+        0.4
+       ],
+       "Color": [
+        0.2353,
+        0.7843,
+        0.8235
+       ],
+       "Material": "Neon",
+       "TopSurface": "Smooth",
+       "BottomSurface": "Smooth",
+       "CFrame": {
+        "CFrame": {
+         "position": [
+          -78,
+          25,
+          -92.4
+         ],
+         "orientation": [
+          [
+           1.0,
+           0.0,
+           0.0
+          ],
+          [
+           0.0,
+           1.0,
+           0.0
+          ],
+          [
+           0.0,
+           0.0,
+           1.0
+          ]
+         ]
+        }
        }
       }
      },
@@ -3044,7 +3557,7 @@
        "Anchored": true,
        "Size": [
         1.2,
-        10,
+        16,
         1.2
        ],
        "Color": [
@@ -3059,8 +3572,8 @@
         "CFrame": {
          "position": [
           -26,
-          14,
-          -92
+          17,
+          -93.2
          ],
          "orientation": [
           [
@@ -3093,9 +3606,9 @@
         0.6
        ],
        "Color": [
-        0.1176,
-        0.1333,
-        0.1882
+        0.0627,
+        0.0706,
+        0.102
        ],
        "Material": "SmoothPlastic",
        "TopSurface": "Smooth",
@@ -3104,7 +3617,7 @@
         "CFrame": {
          "position": [
           -26,
-          19,
+          25,
           -92
          ],
          "orientation": [
@@ -3143,8 +3656,8 @@
          "Font": "FredokaOne",
          "TextColor3": [
           1.0,
-          0.4706,
-          0.3529
+          0.9647,
+          0.8824
          ],
          "BackgroundTransparency": 1,
          "Size": {
@@ -3179,6 +3692,51 @@
         "Range": 18,
         "Brightness": 2,
         "Shadows": false
+       }
+      }
+     },
+     "SignFrame": {
+      "$className": "Part",
+      "$properties": {
+       "Anchored": true,
+       "Size": [
+        21,
+        5,
+        0.4
+       ],
+       "Color": [
+        1.0,
+        0.4706,
+        0.3529
+       ],
+       "Material": "Neon",
+       "TopSurface": "Smooth",
+       "BottomSurface": "Smooth",
+       "CFrame": {
+        "CFrame": {
+         "position": [
+          -26,
+          25,
+          -92.4
+         ],
+         "orientation": [
+          [
+           1.0,
+           0.0,
+           0.0
+          ],
+          [
+           0.0,
+           1.0,
+           0.0
+          ],
+          [
+           0.0,
+           0.0,
+           1.0
+          ]
+         ]
+        }
        }
       }
      },
@@ -4546,7 +5104,7 @@
        "Anchored": true,
        "Size": [
         1.2,
-        10,
+        16,
         1.2
        ],
        "Color": [
@@ -4561,8 +5119,8 @@
         "CFrame": {
          "position": [
           26,
-          14,
-          -92
+          17,
+          -93.2
          ],
          "orientation": [
           [
@@ -4595,9 +5153,9 @@
         0.6
        ],
        "Color": [
-        0.1176,
-        0.1333,
-        0.1882
+        0.0627,
+        0.0706,
+        0.102
        ],
        "Material": "SmoothPlastic",
        "TopSurface": "Smooth",
@@ -4606,7 +5164,7 @@
         "CFrame": {
          "position": [
           26,
-          19,
+          25,
           -92
          ],
          "orientation": [
@@ -4644,9 +5202,9 @@
          "TextScaled": true,
          "Font": "FredokaOne",
          "TextColor3": [
-          0.6667,
-          0.4314,
-          1.0
+          1.0,
+          0.9647,
+          0.8824
          ],
          "BackgroundTransparency": 1,
          "Size": {
@@ -4681,6 +5239,51 @@
         "Range": 18,
         "Brightness": 2,
         "Shadows": false
+       }
+      }
+     },
+     "SignFrame": {
+      "$className": "Part",
+      "$properties": {
+       "Anchored": true,
+       "Size": [
+        21,
+        5,
+        0.4
+       ],
+       "Color": [
+        0.6667,
+        0.4314,
+        1.0
+       ],
+       "Material": "Neon",
+       "TopSurface": "Smooth",
+       "BottomSurface": "Smooth",
+       "CFrame": {
+        "CFrame": {
+         "position": [
+          26,
+          25,
+          -92.4
+         ],
+         "orientation": [
+          [
+           1.0,
+           0.0,
+           0.0
+          ],
+          [
+           0.0,
+           1.0,
+           0.0
+          ],
+          [
+           0.0,
+           0.0,
+           1.0
+          ]
+         ]
+        }
        }
       }
      },
@@ -6048,7 +6651,7 @@
        "Anchored": true,
        "Size": [
         1.2,
-        10,
+        16,
         1.2
        ],
        "Color": [
@@ -6063,8 +6666,8 @@
         "CFrame": {
          "position": [
           78,
-          14,
-          -92
+          17,
+          -93.2
          ],
          "orientation": [
           [
@@ -6097,9 +6700,9 @@
         0.6
        ],
        "Color": [
-        0.1176,
-        0.1333,
-        0.1882
+        0.0627,
+        0.0706,
+        0.102
        ],
        "Material": "SmoothPlastic",
        "TopSurface": "Smooth",
@@ -6108,7 +6711,7 @@
         "CFrame": {
          "position": [
           78,
-          19,
+          25,
           -92
          ],
          "orientation": [
@@ -6146,9 +6749,9 @@
          "TextScaled": true,
          "Font": "FredokaOne",
          "TextColor3": [
-          0.549,
-          0.8627,
-          0.2745
+          1.0,
+          0.9647,
+          0.8824
          ],
          "BackgroundTransparency": 1,
          "Size": {
@@ -6183,6 +6786,51 @@
         "Range": 18,
         "Brightness": 2,
         "Shadows": false
+       }
+      }
+     },
+     "SignFrame": {
+      "$className": "Part",
+      "$properties": {
+       "Anchored": true,
+       "Size": [
+        21,
+        5,
+        0.4
+       ],
+       "Color": [
+        0.549,
+        0.8627,
+        0.2745
+       ],
+       "Material": "Neon",
+       "TopSurface": "Smooth",
+       "BottomSurface": "Smooth",
+       "CFrame": {
+        "CFrame": {
+         "position": [
+          78,
+          25,
+          -92.4
+         ],
+         "orientation": [
+          [
+           1.0,
+           0.0,
+           0.0
+          ],
+          [
+           0.0,
+           1.0,
+           0.0
+          ],
+          [
+           0.0,
+           0.0,
+           1.0
+          ]
+         ]
+        }
        }
       }
      },
@@ -6826,7 +7474,7 @@
       "Anchored": true,
       "Size": [
        1,
-       14,
+       24,
        1
       ],
       "Color": [
@@ -6841,7 +7489,7 @@
        "CFrame": {
         "position": [
          -30,
-         7,
+         12,
          2
         ],
         "orientation": [
@@ -6871,7 +7519,7 @@
       "Anchored": true,
       "Size": [
        1,
-       14,
+       24,
        1
       ],
       "Color": [
@@ -6886,7 +7534,7 @@
        "CFrame": {
         "position": [
          -30,
-         7,
+         12,
          14
         ],
         "orientation": [
@@ -6916,7 +7564,7 @@
       "Anchored": true,
       "Size": [
        1,
-       14,
+       24,
        1
       ],
       "Color": [
@@ -6931,7 +7579,7 @@
        "CFrame": {
         "position": [
          30,
-         7,
+         12,
          2
         ],
         "orientation": [
@@ -6961,7 +7609,7 @@
       "Anchored": true,
       "Size": [
        1,
-       14,
+       24,
        1
       ],
       "Color": [
@@ -6976,7 +7624,7 @@
        "CFrame": {
         "position": [
          30,
-         7,
+         12,
          14
         ],
         "orientation": [
@@ -7021,7 +7669,7 @@
        "CFrame": {
         "position": [
          -28.18181818181818,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7066,7 +7714,7 @@
        "CFrame": {
         "position": [
          -22.545454545454543,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7111,7 +7759,7 @@
        "CFrame": {
         "position": [
          -16.909090909090907,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7156,7 +7804,7 @@
        "CFrame": {
         "position": [
          -11.27272727272727,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7201,7 +7849,7 @@
        "CFrame": {
         "position": [
          -5.636363636363633,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7246,7 +7894,7 @@
        "CFrame": {
         "position": [
          3.552713678800501e-15,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7291,7 +7939,7 @@
        "CFrame": {
         "position": [
          5.63636363636364,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7336,7 +7984,7 @@
        "CFrame": {
         "position": [
          11.272727272727273,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7381,7 +8029,7 @@
        "CFrame": {
         "position": [
          16.909090909090914,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7426,7 +8074,7 @@
        "CFrame": {
         "position": [
          22.545454545454547,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7471,7 +8119,7 @@
        "CFrame": {
         "position": [
          28.181818181818187,
-         14.5,
+         24.5,
          8
         ],
         "orientation": [
@@ -7515,7 +8163,7 @@
       "CFrame": {
        "CFrame": {
         "position": [
-         -21,
+         -24,
          1.2,
          12.3
         ],
@@ -7536,41 +8184,6 @@
           1.0
          ]
         ]
-       }
-      }
-     },
-     "Gui": {
-      "$className": "SurfaceGui",
-      "$properties": {
-       "Face": "Back",
-       "SizingMode": "PixelsPerStud",
-       "PixelsPerStud": 30,
-       "LightInfluence": 0
-      },
-      "Text": {
-       "$className": "TextLabel",
-       "$properties": {
-        "Text": "COMMON",
-        "TextScaled": true,
-        "Font": "FredokaOne",
-        "TextColor3": [
-         0.0784,
-         0.0784,
-         0.1176
-        ],
-        "BackgroundTransparency": 1,
-        "Size": {
-         "UDim2": [
-          [
-           1,
-           0
-          ],
-          [
-           1,
-           0
-          ]
-         ]
-        }
        }
       }
      }
@@ -7595,7 +8208,7 @@
       "CFrame": {
        "CFrame": {
         "position": [
-         -7,
+         -8,
          1.2,
          12.3
         ],
@@ -7616,41 +8229,6 @@
           1.0
          ]
         ]
-       }
-      }
-     },
-     "Gui": {
-      "$className": "SurfaceGui",
-      "$properties": {
-       "Face": "Back",
-       "SizingMode": "PixelsPerStud",
-       "PixelsPerStud": 30,
-       "LightInfluence": 0
-      },
-      "Text": {
-       "$className": "TextLabel",
-       "$properties": {
-        "Text": "RARE",
-        "TextScaled": true,
-        "Font": "FredokaOne",
-        "TextColor3": [
-         0.0784,
-         0.0784,
-         0.1176
-        ],
-        "BackgroundTransparency": 1,
-        "Size": {
-         "UDim2": [
-          [
-           1,
-           0
-          ],
-          [
-           1,
-           0
-          ]
-         ]
-        }
        }
       }
      }
@@ -7675,7 +8253,7 @@
       "CFrame": {
        "CFrame": {
         "position": [
-         7,
+         8,
          1.2,
          12.3
         ],
@@ -7696,41 +8274,6 @@
           1.0
          ]
         ]
-       }
-      }
-     },
-     "Gui": {
-      "$className": "SurfaceGui",
-      "$properties": {
-       "Face": "Back",
-       "SizingMode": "PixelsPerStud",
-       "PixelsPerStud": 30,
-       "LightInfluence": 0
-      },
-      "Text": {
-       "$className": "TextLabel",
-       "$properties": {
-        "Text": "EPIC",
-        "TextScaled": true,
-        "Font": "FredokaOne",
-        "TextColor3": [
-         0.0784,
-         0.0784,
-         0.1176
-        ],
-        "BackgroundTransparency": 1,
-        "Size": {
-         "UDim2": [
-          [
-           1,
-           0
-          ],
-          [
-           1,
-           0
-          ]
-         ]
-        }
        }
       }
      }
@@ -7755,7 +8298,7 @@
       "CFrame": {
        "CFrame": {
         "position": [
-         21,
+         24,
          1.2,
          12.3
         ],
@@ -7776,41 +8319,6 @@
           1.0
          ]
         ]
-       }
-      }
-     },
-     "Gui": {
-      "$className": "SurfaceGui",
-      "$properties": {
-       "Face": "Back",
-       "SizingMode": "PixelsPerStud",
-       "PixelsPerStud": 30,
-       "LightInfluence": 0
-      },
-      "Text": {
-       "$className": "TextLabel",
-       "$properties": {
-        "Text": "LEGENDARY",
-        "TextScaled": true,
-        "Font": "FredokaOne",
-        "TextColor3": [
-         0.0784,
-         0.0784,
-         0.1176
-        ],
-        "BackgroundTransparency": 1,
-        "Size": {
-         "UDim2": [
-          [
-           1,
-           0
-          ],
-          [
-           1,
-           0
-          ]
-         ]
-        }
        }
       }
      }
@@ -7837,7 +8345,7 @@
        "CFrame": {
         "CFrame": {
          "position": [
-          -21,
+          -24,
           2.5,
           8
          ],
@@ -7882,7 +8390,7 @@
         "CFrame": {
          "CFrame": {
           "position": [
-           -21,
+           -24,
            4.3,
            8
           ],
@@ -7942,7 +8450,7 @@
        "CFrame": {
         "CFrame": {
          "position": [
-          -7,
+          -8,
           2.5,
           8
          ],
@@ -7987,7 +8495,7 @@
         "CFrame": {
          "CFrame": {
           "position": [
-           -7,
+           -8,
            4.3,
            8
           ],
@@ -8047,7 +8555,7 @@
        "CFrame": {
         "CFrame": {
          "position": [
-          7,
+          8,
           2.5,
           8
          ],
@@ -8092,7 +8600,7 @@
         "CFrame": {
          "CFrame": {
           "position": [
-           7,
+           8,
            4.3,
            8
           ],
@@ -8152,7 +8660,7 @@
        "CFrame": {
         "CFrame": {
          "position": [
-          21,
+          24,
           2.5,
           8
          ],
@@ -8197,7 +8705,7 @@
         "CFrame": {
          "CFrame": {
           "position": [
-           21,
+           24,
            4.3,
            8
           ],
@@ -8259,7 +8767,7 @@
        "CFrame": {
         "position": [
          0,
-         22,
+         32,
          4
         ],
         "orientation": [
@@ -8358,7 +8866,7 @@
        "CFrame": {
         "position": [
          0,
-         22,
+         32,
          3.6
         ],
         "orientation": [
@@ -8403,7 +8911,7 @@
        "CFrame": {
         "position": [
          0,
-         15.8,
+         25.8,
          16.3
         ],
         "orientation": [
@@ -15480,7 +15988,8 @@
      0.6863
     ],
     "Brightness": 2.8,
-    "ClockTime": 17.7,
+    "ClockTime": 17.4,
+    "GeographicLatitude": 85,
     "GlobalShadows": true,
     "Technology": "Future",
     "EnvironmentDiffuseScale": 0.5
@@ -15507,14 +16016,15 @@
    "Bloom": {
     "$className": "BloomEffect",
     "$properties": {
-     "Intensity": 0.6,
-     "Size": 30,
-     "Threshold": 1.4
+     "Intensity": 0.25,
+     "Size": 24,
+     "Threshold": 1.7
     }
    },
    "Grade": {
     "$className": "ColorCorrectionEffect",
     "$properties": {
+     "Brightness": 0.05,
      "Saturation": 0.15,
      "Contrast": 0.08
     }

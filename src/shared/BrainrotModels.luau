@@ -251,7 +251,7 @@ function Bodies.Moonanchor(m)
 		addPart(m, V(2.6, 0.7, 0.7), C(s * 1.1, 0.9, 0) * A(0, 0, rad(s * 28)), iron, metal) -- flukes
 		addPart(m, V(1.0, 1.0, 0.5), C(s * 2.3, 1.6, 0) * A(0, 0, rad(s * -20)), iron, metal)
 	end
-	ball(m, 3.0, 0, 7.4, 0, rgb(255, 245, 180), { material = NEON }) -- the moon
+	ball(m, 3.0, 0, 7.4, 0, rgb(225, 210, 140), { material = NEON }) -- the moon (dimmed so bloom cannot blow it out)
 	ball(m, 2.7, 0.9, 7.7, -0.5, rgb(25, 30, 70)) -- shadow carving the crescent
 	ball(m, 0.4, -0.9, 7.6, -1.35, rgb(20, 20, 30))
 	addPart(m, V(0.6, 0.2, 0.2), C(-0.8, 6.9, -1.4), rgb(20, 20, 30))
@@ -281,27 +281,41 @@ end
 
 -- Labels, mutation and assembly ---------------------------------------------------------------------
 
-local function addNameRarityRateLabel(root: BasePart, entry, mutated: boolean, height: number, price: number?)
+-- Label gap above the creature's head. On a plot every slot instead has a fixed label height, measured from the
+-- tallest keeper (Moonanchor, 19 studs) plus a per-slot step: the back row (slots 1-3) sits well over a label's
+-- height above the front row, so a back-row label never lands on the front-row label in front of it. Side by side,
+-- the 8-stud labels on 13-stud slot spacing cannot touch.
+local LABEL_GAP = 0.4
+local TALLEST_BODY = 19
+local SLOT_LABEL_BASE, SLOT_LABEL_STEP = 3.2, 2.6
+local SLOTS_PER_ROW = 3
+
+local function slotLabelLift(slotIndex: number): number
+	local backRow = if slotIndex <= SLOTS_PER_ROW then 1 else 0
+	return TALLEST_BODY + SLOT_LABEL_BASE + backRow * 3 * SLOT_LABEL_STEP
+end
+
+local function addNameRarityRateLabel(root: BasePart, entry, mutated: boolean, height: number)
 	local rarityColor = if mutated then Brainrots.GOLD else Brainrots.rarityColor(entry.rarity)
+	-- At most three short lines: name, rarity, rate.
 	local lines = {
-		{ entry.name, 1.7, Color3.new(1, 1, 1) },
-		{ (if mutated then "GOLDEN " else "") .. string.upper(entry.rarity), 1.25, rarityColor },
-		{ Economy.formatMoney(Economy.keeperRate(entry, mutated)) .. "/s", 1.4, rgb(110, 255, 120) },
+		{ entry.name, 1.3, Color3.new(1, 1, 1) },
+		{ (if mutated then "GOLD " else "") .. string.upper(entry.rarity), 0.9, rarityColor },
+		{ Economy.formatMoney(Economy.keeperRate(entry, mutated)) .. "/s", 1.1, rgb(110, 255, 120) },
 	}
-	if price then
-		table.insert(lines, { "BUY " .. Economy.formatMoney(price), 1.4, rgb(255, 230, 90) })
-	end
 	local totalStuds = 0
 	for _, line in lines do
 		totalStuds += line[2]
 	end
 
-	-- Sized in studs, not pixels, so far-away labels shrink instead of piling up on screen.
+	-- One billboard per keeper, sized in studs (not pixels) so nearer keepers read larger and far ones shrink,
+	-- depth-tested so it sits in the world instead of stacking over everything.
 	local bb = Instance.new("BillboardGui")
 	bb.Name = "KeeperLabel"
-	bb.Size = UDim2.fromScale(13, totalStuds)
-	bb.StudsOffsetWorldSpace = V(0, height + totalStuds / 2 + 0.4, 0)
-	bb.MaxDistance = 110
+	bb.Size = UDim2.fromScale(8, totalStuds)
+	bb.StudsOffsetWorldSpace = V(0, height + totalStuds / 2 + LABEL_GAP, 0)
+	bb.MaxDistance = 75
+	bb.AlwaysOnTop = false
 	bb.LightInfluence = 0
 	bb.Adornee = root
 	bb.Parent = root
@@ -322,6 +336,43 @@ local function addNameRarityRateLabel(root: BasePart, entry, mutated: boolean, h
 		t.Parent = bb
 		y += line[2]
 	end
+	return height + totalStuds + LABEL_GAP
+end
+
+-- The stall's "BUY $X" tag: a dark plate raised above the keeper's label and off to one side so it never sits
+-- on the keeper. Starts hidden; the client shows it only on the pedestal the player is standing at.
+local function addPriceTag(root: BasePart, price: number, labelTop: number)
+	local bb = Instance.new("BillboardGui")
+	bb.Name = "PriceTag"
+	bb.Size = UDim2.fromScale(7, 1.8)
+	bb.StudsOffsetWorldSpace = V(2.5, labelTop + 3.5, 0)
+	bb.MaxDistance = 40
+	bb.AlwaysOnTop = false
+	bb.LightInfluence = 0
+	bb.Enabled = false
+	bb.Adornee = root
+	bb.Parent = root
+	local plate = Instance.new("TextLabel")
+	plate.Size = UDim2.fromScale(1, 1)
+	plate.BackgroundColor3 = rgb(14, 24, 44)
+	plate.BackgroundTransparency = 0.05
+	plate.Font = Enum.Font.FredokaOne
+	plate.Text = "BUY " .. Economy.formatMoney(price)
+	plate.TextScaled = true
+	plate.TextColor3 = rgb(255, 230, 90)
+	plate.Parent = bb
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0.3, 0)
+	corner.Parent = plate
+	local stroke = Instance.new("UIStroke")
+	stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	stroke.Color = rgb(255, 230, 90)
+	stroke.Thickness = 2
+	stroke.Parent = plate
+	local pad = Instance.new("UIPadding")
+	pad.PaddingTop = UDim.new(0.12, 0)
+	pad.PaddingBottom = UDim.new(0.12, 0)
+	pad.Parent = plate
 end
 
 local function applyGoldenMutation(model: Model, root: BasePart)
@@ -338,7 +389,7 @@ local function applyGoldenMutation(model: Model, root: BasePart)
 	sparkles.Parent = root
 end
 
--- Builds a finished, welded keeper. Pass price to add a BUY line (stall display).
+-- Builds a finished, welded keeper. Pass price to add a BUY tag (stall display).
 function BrainrotModels.build(id: string, mutated: boolean, price: number?): Model
 	local entry = assert(Brainrots.get(id), "unknown brainrot " .. tostring(id))
 	local model = Instance.new("Model")
@@ -362,15 +413,24 @@ function BrainrotModels.build(id: string, mutated: boolean, price: number?): Mod
 	model:ScaleTo(Brainrots.Rarities[entry.rarity].scale)
 	model:SetAttribute("KeeperId", entry.id)
 	model:SetAttribute("Mutated", mutated)
-	addNameRarityRateLabel(root, entry, mutated, model:GetExtentsSize().Y, price)
+	local labelTop = addNameRarityRateLabel(root, entry, mutated, model:GetExtentsSize().Y)
+	if price then
+		addPriceTag(root, price, labelTop)
+	end
 	return model
 end
 
--- Stands a keeper on the top face of a slot or pedestal, facing the market (+Z).
-function BrainrotModels.standOn(model: Model, surface: BasePart)
+-- Stands a keeper on the top face of a slot or pedestal, facing the market (+Z). On a plot, pass the slot index
+-- to lift the label to that slot's fixed height so keepers side by side never stack their labels.
+function BrainrotModels.standOn(model: Model, surface: BasePart, slotIndex: number?)
 	local halfHeight = if surface.Shape == Enum.PartType.Cylinder then surface.Size.X / 2 else surface.Size.Y / 2
-	model.PrimaryPart.Anchored = true
+	local root = model.PrimaryPart
+	root.Anchored = true
 	model:PivotTo(C(surface.Position + V(0, halfHeight, 0)) * A(0, math.pi, 0))
+	local label = root:FindFirstChild("KeeperLabel")
+	if slotIndex and label then
+		label.StudsOffsetWorldSpace = V(0, slotLabelLift(slotIndex) + label.Size.Y.Scale / 2, 0)
+	end
 end
 
 return BrainrotModels

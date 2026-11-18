@@ -13,7 +13,7 @@ local rgb = Color3.fromRGB
 local FONT = Enum.Font.FredokaOne
 local PANEL = rgb(14, 24, 44)
 
-local gui: ScreenGui
+local gui: Frame
 local refs: { [string]: any } = {}
 
 local function roundAndOutline(parent: GuiObject, radius: number?): UIStroke
@@ -28,15 +28,24 @@ local function roundAndOutline(parent: GuiObject, radius: number?): UIStroke
 	return s
 end
 
+local PAD = 8
+
+-- A near-opaque panel (nothing in the world shows half through it) with PAD px of inner padding; size is the content size.
 local function panel(name: string, size: UDim2, pos: UDim2, anchor: Vector2): (Frame, UIStroke)
 	local f = Instance.new("Frame")
 	f.Name = name
-	f.Size = size
+	f.Size = size + UDim2.fromOffset(PAD * 2, PAD * 2)
 	f.Position = pos
 	f.AnchorPoint = anchor
 	f.BackgroundColor3 = PANEL
-	f.BackgroundTransparency = 0.15
+	f.BackgroundTransparency = 0.03
 	f.Parent = gui
+	local pad = Instance.new("UIPadding")
+	pad.PaddingTop = UDim.new(0, PAD)
+	pad.PaddingBottom = UDim.new(0, PAD)
+	pad.PaddingLeft = UDim.new(0, PAD)
+	pad.PaddingRight = UDim.new(0, PAD)
+	pad.Parent = f
 	return f, roundAndOutline(f)
 end
 
@@ -80,7 +89,7 @@ local function buildCarryBar()
 end
 
 local function buildRebirthPanel(onRebirth: () -> ())
-	local f = panel("Rebirth", UDim2.fromOffset(230, 112), UDim2.new(1, -14, 0, 100), Vector2.new(1, 0))
+	local f = panel("Rebirth", UDim2.fromOffset(230, 112), UDim2.new(1, -14, 0, 116), Vector2.new(1, 0))
 	text(f, "Title", "REBIRTH", 25, rgb(255, 140, 255), UDim2.fromOffset(0, 2), UDim2.new(1, 0, 0, 30))
 	refs.rebirthInfo = text(f, "Info", "", 16, Color3.new(1, 1, 1), UDim2.fromOffset(0, 32), UDim2.new(1, 0, 0, 20))
 	local bar = Instance.new("Frame")
@@ -114,12 +123,16 @@ end
 
 local function buildKeeperIndex()
 	local rowHeight = 18
+	refs.indexRows = {}
 	local f = panel("Index", UDim2.fromOffset(212, 38 + #Brainrots.Catalogue * rowHeight), UDim2.new(0, 12, 1, -12), Vector2.new(0, 1))
 	text(f, "Title", "KEEPER INDEX", 19, rgb(255, 225, 80), UDim2.fromOffset(0, 5), UDim2.new(1, 0, 0, 24))
 	for i, entry in Brainrots.Catalogue do
 		local row = text(f, entry.id, "", 15, Brainrots.rarityColor(entry.rarity), UDim2.fromOffset(10, 32 + (i - 1) * rowHeight), UDim2.new(1, -20, 0, rowHeight))
 		row.TextXAlignment = Enum.TextXAlignment.Left
 		row.Text = entry.name .. "  " .. Economy.formatMoney(entry.rate) .. "/s"
+		row.BackgroundColor3 = Brainrots.rarityColor(entry.rarity)
+		Instance.new("UICorner").Parent = row
+		refs.indexRows[entry.id] = row
 	end
 end
 
@@ -128,7 +141,7 @@ local function buildToastStack()
 	holder.Name = "Toasts"
 	holder.BackgroundTransparency = 1
 	holder.Size = UDim2.fromOffset(720, 150)
-	holder.Position = UDim2.new(0.5, 0, 1, -96)
+	holder.Position = UDim2.new(0.5, 0, 1, -112)
 	holder.AnchorPoint = Vector2.new(0.5, 1)
 	holder.Parent = gui
 	local layout = Instance.new("UIListLayout")
@@ -139,12 +152,32 @@ local function buildToastStack()
 	refs.toasts = holder
 end
 
-function HUD.mount(playerGui: PlayerGui, onRebirth: () -> ()): ScreenGui
-	gui = Instance.new("ScreenGui")
-	gui.Name = "TideKeepersHUD"
-	gui.ResetOnSpawn = false
-	gui.IgnoreGuiInset = true
-	gui.Parent = playerGui
+-- Lays the HUD out as if the screen were 720 px tall: a root frame of 1/s screens scaled by s, so panels keep the
+-- same share of the view on a small Studio viewport and a big monitor alike.
+local function mountScaledRoot(screen: ScreenGui): Frame
+	local root = Instance.new("Frame")
+	root.Name = "Root"
+	root.BackgroundTransparency = 1
+	root.Parent = screen
+	local scale = Instance.new("UIScale")
+	scale.Parent = root
+	local function fit()
+		local s = math.clamp(workspace.CurrentCamera.ViewportSize.Y / 720, 0.5, 2)
+		scale.Scale = s
+		root.Size = UDim2.fromScale(1 / s, 1 / s)
+	end
+	workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(fit)
+	fit()
+	return root
+end
+
+function HUD.mount(playerGui: PlayerGui, onRebirth: () -> ()): Frame
+	local screen = Instance.new("ScreenGui")
+	screen.Name = "TideKeepersHUD"
+	screen.ResetOnSpawn = false
+	screen.IgnoreGuiInset = true
+	screen.Parent = playerGui
+	gui = mountScaledRoot(screen)
 	buildMoneyPanel()
 	buildTideClock()
 	buildCarryBar()
@@ -167,7 +200,9 @@ function HUD.showMoney(money: number, income: number, multiplier: number, rebirt
 	refs.rebirthFill.Size = UDim2.fromScale(math.clamp(money / Config.REBIRTH_COST, 0, 1), 1)
 	refs.rebirthInfo.Text = string.format("Rebirths: %d   next x%.2f", rebirths, Economy.rebirthMultiplier(rebirths + 1))
 	local ready = Economy.canRebirth(money)
-	refs.rebirthButton.Text = if ready then "REBIRTH NOW!" else "needs " .. Economy.formatMoney(Config.REBIRTH_COST)
+	-- Below the cost the bar's numbers are printed too, so the fill and the text can never disagree.
+	local ratio = Economy.formatMoney(math.min(money, Config.REBIRTH_COST)):sub(2) .. " / " .. Economy.formatMoney(Config.REBIRTH_COST):sub(2)
+	refs.rebirthButton.Text = if ready then "REBIRTH NOW!" else ratio
 	refs.rebirthButton.BackgroundColor3 = if ready then rgb(230, 70, 230) else rgb(80, 50, 100)
 end
 
@@ -179,6 +214,13 @@ function HUD.showCarrying(id: string, mutated: boolean)
 		refs.carryName.Text = "CARRYING: " .. entry.name .. "  (" .. tag .. ", " .. Economy.formatMoney(Economy.keeperRate(entry, mutated)) .. "/s)"
 		refs.carryName.TextColor3 = if mutated then Brainrots.GOLD else Brainrots.rarityColor(entry.rarity)
 	end
+	-- The index marks the row of the keeper being carried right now.
+	for rowId, row in refs.indexRows do
+		local carried = entry ~= nil and rowId == entry.id
+		row.BackgroundTransparency = if carried then 0.55 else 1
+		row.Text = (if carried then "> " else "") .. Brainrots.get(rowId).name .. "  " .. Economy.formatMoney(Brainrots.get(rowId).rate) .. "/s"
+		row.TextColor3 = if carried then Color3.new(1, 1, 1) else Brainrots.rarityColor(Brainrots.get(rowId).rarity)
+	end
 end
 
 function HUD.showTideClock(title: string, seconds: number, color: Color3)
@@ -188,16 +230,34 @@ function HUD.showTideClock(title: string, seconds: number, color: Color3)
 	refs.tideTitle.TextColor3 = color
 end
 
+-- A toast on a dark plate with a border in the message's colour, so it reads over bright bloom or neon.
 function HUD.toast(message: string, color: Color3)
-	local t = text(refs.toasts, "Toast", message, 26, color, nil, UDim2.fromOffset(720, 32))
+	local t = text(refs.toasts, "Toast", message, 24, color, nil, UDim2.fromOffset(0, 40))
+	t.AutomaticSize = Enum.AutomaticSize.X
+	t.BackgroundColor3 = PANEL
+	t.BackgroundTransparency = 0.05
+	local pad = Instance.new("UIPadding")
+	pad.PaddingLeft = UDim.new(0, 16)
+	pad.PaddingRight = UDim.new(0, 16)
+	pad.Parent = t
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 10)
+	corner.Parent = t
+	local border = Instance.new("UIStroke")
+	border.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	border.Color = color
+	border.Thickness = 2
+	border.Parent = t
 	task.delay(3, function()
-		local fade = TweenService:Create(t, TweenInfo.new(0.6), { TextTransparency = 1, TextStrokeTransparency = 1 })
+		local info = TweenInfo.new(0.6)
+		TweenService:Create(border, info, { Transparency = 1 }):Play()
+		local fade = TweenService:Create(t, info, { TextTransparency = 1, TextStrokeTransparency = 1, BackgroundTransparency = 1 })
 		fade:Play()
 		fade.Completed:Wait()
 		t:Destroy()
 	end)
 	local shown = refs.toasts:GetChildren()
-	if #shown > 5 then
+	if #shown > 4 then
 		for _, child in shown do
 			if child:IsA("TextLabel") then
 				child:Destroy()

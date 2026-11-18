@@ -14,7 +14,7 @@ local CALM = Color3.fromRGB(110, 210, 255)
 local WARN = Color3.fromRGB(255, 160, 40)
 local SURGE = Color3.fromRGB(255, 70, 70)
 
-function TideWarning.start(gui: ScreenGui)
+function TideWarning.start(gui: GuiObject)
 	local frame = Instance.new("Frame")
 	frame.Name = "TideVignette"
 	frame.Size = UDim2.fromScale(1, 1)

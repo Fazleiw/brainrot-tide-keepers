@@ -25,6 +25,7 @@ function CarryService.pickUp(player: Player, keeper: State.Keeper)
 	end
 	local model = BrainrotModels.build(keeper.id, keeper.mutated)
 	model.Name = "Carried_" .. keeper.id
+	model.PrimaryPart.KeeperLabel:Destroy() -- the HUD's carry bar names it; a second floating tag would only clutter
 	model:ScaleTo(model:GetScale() * 0.7)
 	model:PivotTo(head.CFrame * CFrame.new(0, 1, 0))
 	local weld = Instance.new("WeldConstraint")
