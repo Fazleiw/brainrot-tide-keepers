@@ -1,0 +1,7 @@
+# Studio playtest copies, captures and gate output
+build/
+out/
+*.rbxl.lock
+# Python bytecode from tools/
+__pycache__/
+.DS_Store

@@ -1,1 +1,1 @@
-{"tour": 1, "steps": [{"screenshot": "1-start.png"}, {"screenshot": "2-play.png", "keys": ["Right"], "wait_ms": 1000}, {"screenshot": "3-end.png", "keys": ["Down"], "wait_ms": 1000}]}
+{"tour": 1, "steps": [{"screenshot": "1-base-earning.jpg", "keys": [], "wait_ms": 0}, {"screenshot": "2-stall-buy.jpg", "keys": [], "wait_ms": 0}, {"screenshot": "3-steal.jpg", "keys": [], "wait_ms": 0}, {"screenshot": "4-tide-surge.jpg", "keys": [], "wait_ms": 3000}]}
